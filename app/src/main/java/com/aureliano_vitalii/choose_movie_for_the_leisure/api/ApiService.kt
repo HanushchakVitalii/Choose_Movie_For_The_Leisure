@@ -1,16 +1,16 @@
 package com.aureliano_vitalii.choose_movie_for_the_leisure.api
 
-import com.aureliano_vitalii.choose_movie_for_the_leisure.pojo.Datum
+import com.aureliano_vitalii.choose_movie_for_the_leisure.pojo.DatumDto
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ApiService {
 
     @GET("3/movie/popular")
-    fun getDatum(
+    suspend fun getDatum(
         @Query(QUERY_PARAM_API_KEY) apiKey:String = API_KEY,
         @Query(QUERY_PARAM_LANG) lang:String = LANG_DEFAULT,
-        @Query(QUERY_PARAM_PAGE) page:Int = PAGE_DEFAULT): Datum
+        @Query(QUERY_PARAM_PAGE) page:String = PAGE_DEFAULT): DatumDto
 
 
     companion object {
@@ -20,6 +20,6 @@ interface ApiService {
 
         private const val API_KEY = "5759a7a8711f6da8c47f6fc32b5aba93"
         private const val LANG_DEFAULT = "en-US"
-        private const val PAGE_DEFAULT = 1
+        private const val PAGE_DEFAULT = "1"
     }
 }

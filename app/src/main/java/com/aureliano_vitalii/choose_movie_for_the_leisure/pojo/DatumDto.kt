@@ -4,15 +4,14 @@ import com.google.gson.annotations.Expose
 
 import com.google.gson.annotations.SerializedName
 
-
-data class Datum (
+data class DatumDto (
     @SerializedName("page")
     @Expose
     private val page: Int? = null,
 
     @SerializedName("results")
     @Expose
-    private val results: List<FilmInfo>? = null,
+    private val results: List<FilmInfoDto>? = null,
 
     @SerializedName("total_pages")
     @Expose
