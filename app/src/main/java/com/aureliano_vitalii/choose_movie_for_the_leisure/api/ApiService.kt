@@ -1,5 +1,6 @@
 package com.aureliano_vitalii.choose_movie_for_the_leisure.api
 
+import com.aureliano_vitalii.choose_movie_for_the_leisure.pojo.GenreResponseDto
 import com.aureliano_vitalii.choose_movie_for_the_leisure.pojo.MainFilmResponseDto
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -11,6 +12,11 @@ interface ApiService {
         @Query(QUERY_PARAM_API_KEY) apiKey:String = API_KEY,
         @Query(QUERY_PARAM_LANG) lang:String = LANG_DEFAULT,
         @Query(QUERY_PARAM_PAGE) page:Int = PAGE_DEFAULT): MainFilmResponseDto
+
+    @GET("3/genre/movie/list")
+    suspend fun getGenreFilmResponse(
+        @Query(QUERY_PARAM_API_KEY) apiKey:String = API_KEY,
+        @Query(QUERY_PARAM_LANG) lang:String = LANG_DEFAULT): GenreResponseDto
 
 
     companion object {
