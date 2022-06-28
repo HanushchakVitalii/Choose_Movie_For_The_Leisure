@@ -25,9 +25,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.load()
         btn = findViewById(R.id.btnCheck)
         textView = findViewById(R.id.textView)
-        btn.setOnClickListener {
-            textView.text = viewModel.worktaksyak()
-        }
+
 
 
     }
