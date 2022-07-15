@@ -14,7 +14,6 @@ object FilmRepository {
 
     private val apiService = ApiFactory.apiService
     private var mainFilmResponseDto: MainFilmResponseDto? = null
-    private val filmShortInfoListLD = MutableLiveData<Set<FilmShortInfo>>()
     private val filmShortInfoSet = mutableSetOf<FilmShortInfo>()
     private val filmInfoMap = mutableMapOf<Int?, FilmInfoDto>()
     private var isSuccessfullLoadData: Boolean = false
@@ -42,12 +41,9 @@ object FilmRepository {
 
     }
 
-    fun getFilmShotInfoSet(): MutableLiveData<Set<FilmShortInfo>> {
+    fun getFilmShortInfoSet(): Set<FilmShortInfo> {
         createFilmInfo()
-        filmShortInfoListLD.value = filmShortInfoSet.toSet()
-        return filmShortInfoListLD
-
-
+        return filmShortInfoSet
     }
 
     fun getFilmInfo(id: Int): FilmInfoDto? {
@@ -69,7 +65,6 @@ object FilmRepository {
                 }
             }
         }
-        Log.d("trr", filmInfoMap.toString())
 
     }
 
