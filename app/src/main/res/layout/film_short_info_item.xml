@@ -22,10 +22,10 @@
 
         <ImageView
             android:id="@+id/posterView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/placeholder_film"
-            android:contentDescription="@string/filmPoster" />
+            android:layout_width="190dp"
+            android:layout_height="285dp"
+            android:contentDescription="@string/filmPoster"
+            app:srcCompat="@drawable/placeholder_film" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,20 +37,23 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_margin="5dp"
+                android:background="@drawable/circle_standard_background"
+                android:gravity="center"
+                android:text="@string/standardNumber"
+                android:textColor="@color/black"
                 android:textSize="16sp"
-                android:background="@drawable/circle_background"
-                android:text="@string/standardVote"
-                android:gravity="center"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/titleName"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:textSize="14sp"
                 android:gravity="center"
-                android:layout_weight="1"
-                android:text="@string/filmName" />
+                android:text="@string/filmName"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
     </LinearLayout>

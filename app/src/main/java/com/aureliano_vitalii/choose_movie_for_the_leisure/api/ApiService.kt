@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface ApiService {
 
-    @GET("3/movie/popular")
+    @GET("3/movie/top_rated")
     suspend fun getMainFilmResponse(
         @Query(QUERY_PARAM_API_KEY) apiKey:String = API_KEY,
         @Query(QUERY_PARAM_LANG) lang:String = LANG_DEFAULT,

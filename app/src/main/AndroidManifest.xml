@@ -3,6 +3,7 @@
     package="com.aureliano_vitalii.choose_movie_for_the_leisure">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"

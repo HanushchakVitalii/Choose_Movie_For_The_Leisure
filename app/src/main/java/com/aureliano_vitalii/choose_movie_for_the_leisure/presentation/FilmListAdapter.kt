@@ -3,18 +3,15 @@ package com.aureliano_vitalii.choose_movie_for_the_leisure.presentation
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.aureliano_vitalii.choose_movie_for_the_leisure.R
 import com.aureliano_vitalii.choose_movie_for_the_leisure.databinding.FilmShortInfoItemBinding
 import com.aureliano_vitalii.choose_movie_for_the_leisure.entity.FilmShortInfo
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
 
-class FilmListAdapter : RecyclerView.Adapter<FilmListAdapter.FilmShortInfoViewHolder>() {
-    var filmInfoList = listOf<FilmShortInfo>()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
 
+class FilmListAdapter : ListAdapter<FilmShortInfo, FilmListAdapter.FilmShortInfoViewHolder>(FilmShortItemDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmShortInfoViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -24,19 +21,23 @@ class FilmListAdapter : RecyclerView.Adapter<FilmListAdapter.FilmShortInfoViewHo
     }
 
     override fun onBindViewHolder(holder: FilmShortInfoViewHolder, position: Int) {
-        holder.bindView(filmInfoList[position])
+        holder.bindView(getItem(position))
     }
 
-    override fun getItemCount(): Int {
-        return filmInfoList.size
-    }
 
     class FilmShortInfoViewHolder(private val binding: FilmShortInfoItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindView(filmItem: FilmShortInfo) {
-            binding.titleName.text = filmItem.title
-            binding.voteAverageView.text = filmItem.voteAverage.toString()
-            Picasso.get().load(filmItem.poster_path).into(binding.posterView)
+            with(binding) {
+                titleName.text = filmItem.title
+                voteAverageView.text = filmItem.voteAverage.toString()
+                Glide.with(posterView.context)
+                    .load(filmItem.poster_path)
+                    .placeholder(R.drawable.placeholder_film)
+                    .error(R.drawable.placeholder_film)
+                    .into(posterView)
+            }
+
         }
     }
 

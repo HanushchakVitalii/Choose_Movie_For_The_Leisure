@@ -7,10 +7,14 @@ import com.aureliano_vitalii.choose_movie_for_the_leisure.entity.FilmShortInfo
 import com.aureliano_vitalii.choose_movie_for_the_leisure.pojo.FilmInfoDto
 import com.aureliano_vitalii.choose_movie_for_the_leisure.pojo.GenreResponseDto
 import com.aureliano_vitalii.choose_movie_for_the_leisure.pojo.MainFilmResponseDto
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import kotlin.math.log
 
 object FilmRepository {
 
     private const val BASE_URL_FOR_IMAGE = "https://image.tmdb.org/t/p/w500"
+
 
     private val apiService = ApiFactory.apiService
     private var mainFilmResponseDto: MainFilmResponseDto? = null
@@ -21,24 +25,22 @@ object FilmRepository {
     private var getGenreFilmResponse: GenreResponseDto? = null
 
 
-    suspend fun loadData(): Boolean {
+    suspend fun loadData(page:Int) = withContext(Dispatchers.IO) {
         try {
-            mainFilmResponseDto = apiService.getMainFilmResponse()
+            mainFilmResponseDto = apiService.getMainFilmResponse(page = page)
             isSuccessfullLoadData = true
+
         } catch (e: Exception) {
         }
-        return isSuccessfullLoadData
 
     }
 
-    suspend fun loadGenre(): Boolean {
+    suspend fun loadGenre() {
         try {
             getGenreFilmResponse = apiService.getGenreFilmResponse()
             isSuccessfullLoadGenre = true
         } catch (e: Exception) {
         }
-        return isSuccessfullLoadGenre
-
     }
 
     fun getFilmShortInfoSet(): Set<FilmShortInfo> {

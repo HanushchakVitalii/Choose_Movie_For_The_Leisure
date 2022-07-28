@@ -22,10 +22,6 @@ data class FilmInfoDto (
     @Expose
      val overview: String? = null,
 
-    @SerializedName("popularity")
-    @Expose
-     val popularity: Double? = null,
-
     @SerializedName("poster_path")
     @Expose
      val posterPath: String? = null,

@@ -15,8 +15,11 @@ class FilmInfoViewModel : ViewModel() {
 
     init {
         viewModelScope.launch {
-            FilmRepository.loadData()
+            for(i in 1..20){
+                FilmRepository.loadData(i)
+            }
             filmList.value = FilmRepository.getFilmShortInfoSet().toList()
+
         }
     }
 }

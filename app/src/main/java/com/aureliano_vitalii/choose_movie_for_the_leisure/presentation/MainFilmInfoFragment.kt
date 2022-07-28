@@ -30,7 +30,6 @@ class MainFilmInfoFragment : Fragment() {
         val rvFilmListInfo = _binding?.rvFilmListInfo
         filmAdapter = FilmListAdapter()
         rvFilmListInfo?.adapter = filmAdapter
-        Log.d("onSetupRecycler", filmAdapter.toString())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,8 +38,8 @@ class MainFilmInfoFragment : Fragment() {
         viewModel = ViewModelProvider(this)[FilmInfoViewModel::class.java]
 
         viewModel.filmList.observe(viewLifecycleOwner) {
-            filmAdapter.filmInfoList = it
-            Log.d("viewCeated", filmAdapter.filmInfoList.toString())
+            filmAdapter.submitList(it)
+
         }
     }
 
