@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.aureliano_vitalii.choose_movie_for_the_leisure.R
 import com.aureliano_vitalii.choose_movie_for_the_leisure.databinding.FragmentMainFilmInfoBinding
+import com.aureliano_vitalii.choose_movie_for_the_leisure.entity.ShortFilmInfo
 
 
 class MainFilmInfoFragment : Fragment() {
@@ -26,11 +28,7 @@ class MainFilmInfoFragment : Fragment() {
         return binding.root
     }
 
-    private fun setupRecyclerView() {
-        val rvFilmListInfo = _binding?.rvFilmListInfo
-        filmAdapter = FilmListAdapter()
-        rvFilmListInfo?.adapter = filmAdapter
-    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,6 +39,26 @@ class MainFilmInfoFragment : Fragment() {
             filmAdapter.submitList(it)
 
         }
+        setupClickListener()
+    }
+
+    private fun setupClickListener(){
+        filmAdapter.onShopItemClickListener = {
+             launchFullFilmFragment(it)
+        }
+    }
+
+    private fun setupRecyclerView() {
+        val rvFilmListInfo = _binding?.rvFilmListInfo
+        filmAdapter = FilmListAdapter()
+        rvFilmListInfo?.adapter = filmAdapter
+    }
+
+    private fun launchFullFilmFragment(film: ShortFilmInfo){
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.main_container, FullFilmInfoFragment.newInstance(film))
+            .addToBackStack(null)
+            .commit()
     }
 
     override fun onDestroyView() {

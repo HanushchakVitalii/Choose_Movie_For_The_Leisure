@@ -1,15 +1,13 @@
 package com.aureliano_vitalii.choose_movie_for_the_leisure.repository
 
-import android.util.Log
 import com.aureliano_vitalii.choose_movie_for_the_leisure.api.ApiFactory
-import androidx.lifecycle.MutableLiveData
-import com.aureliano_vitalii.choose_movie_for_the_leisure.entity.FilmShortInfo
+import com.aureliano_vitalii.choose_movie_for_the_leisure.entity.AdditionalFilmInfo
+import com.aureliano_vitalii.choose_movie_for_the_leisure.entity.ShortFilmInfo
 import com.aureliano_vitalii.choose_movie_for_the_leisure.pojo.FilmInfoDto
 import com.aureliano_vitalii.choose_movie_for_the_leisure.pojo.GenreResponseDto
 import com.aureliano_vitalii.choose_movie_for_the_leisure.pojo.MainFilmResponseDto
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import kotlin.math.log
 
 object FilmRepository {
 
@@ -18,14 +16,14 @@ object FilmRepository {
 
     private val apiService = ApiFactory.apiService
     private var mainFilmResponseDto: MainFilmResponseDto? = null
-    private val filmShortInfoSet = mutableSetOf<FilmShortInfo>()
-    private val filmInfoMap = mutableMapOf<Int?, FilmInfoDto>()
+    private val filmShortInfoSet = mutableSetOf<ShortFilmInfo>()
+    private val filmInfoMap = mutableMapOf<Int?, AdditionalFilmInfo>()
     private var isSuccessfullLoadData: Boolean = false
     private var isSuccessfullLoadGenre: Boolean = false
     private var getGenreFilmResponse: GenreResponseDto? = null
 
 
-    suspend fun loadData(page:Int) = withContext(Dispatchers.IO) {
+    suspend fun loadData(page: Int) = withContext(Dispatchers.IO) {
         try {
             mainFilmResponseDto = apiService.getMainFilmResponse(page = page)
             isSuccessfullLoadData = true
@@ -43,12 +41,12 @@ object FilmRepository {
         }
     }
 
-    fun getFilmShortInfoSet(): Set<FilmShortInfo> {
+    fun getFilmShortInfoSet(): Set<ShortFilmInfo> {
         createFilmInfo()
         return filmShortInfoSet
     }
 
-    fun getFilmInfo(id: Int): FilmInfoDto? {
+    fun getFilmAdditionalInfo(id: Int): AdditionalFilmInfo? {
         return filmInfoMap[id]
     }
 
@@ -56,14 +54,21 @@ object FilmRepository {
         if (isSuccessfullLoadData) {
             mainFilmResponseDto?.let {
                 for (i in it.results!!) {
-                    val filmShortInfo = FilmShortInfo(
+                    val shortFilmInfo = ShortFilmInfo(
                         i.id,
                         i.title,
                         BASE_URL_FOR_IMAGE + i.posterPath,
                         i.voteAverage
                     )
-                    filmInfoMap[i.id] = i
-                    filmShortInfoSet.add(filmShortInfo)
+                    val additionalFilmInfo = AdditionalFilmInfo(
+                        i.adult,
+                        i.genreIds,
+                        i.overview,
+                        i.voteCount,
+                        i.releaseDate
+                        )
+                    filmInfoMap[i.id] = additionalFilmInfo
+                    filmShortInfoSet.add(shortFilmInfo)
                 }
             }
         }

@@ -7,11 +7,13 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.aureliano_vitalii.choose_movie_for_the_leisure.R
 import com.aureliano_vitalii.choose_movie_for_the_leisure.databinding.FilmShortInfoItemBinding
-import com.aureliano_vitalii.choose_movie_for_the_leisure.entity.FilmShortInfo
+import com.aureliano_vitalii.choose_movie_for_the_leisure.entity.ShortFilmInfo
 import com.bumptech.glide.Glide
 
 
-class FilmListAdapter : ListAdapter<FilmShortInfo, FilmListAdapter.FilmShortInfoViewHolder>(FilmShortItemDiffCallback()) {
+class FilmListAdapter : ListAdapter<ShortFilmInfo, FilmListAdapter.FilmShortInfoViewHolder>(FilmShortItemDiffCallback()) {
+
+    var onShopItemClickListener: ((ShortFilmInfo) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmShortInfoViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -25,17 +27,21 @@ class FilmListAdapter : ListAdapter<FilmShortInfo, FilmListAdapter.FilmShortInfo
     }
 
 
-    class FilmShortInfoViewHolder(private val binding: FilmShortInfoItemBinding) :
+    inner class FilmShortInfoViewHolder(private val binding: FilmShortInfoItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bindView(filmItem: FilmShortInfo) {
+        fun bindView(itemFilm: ShortFilmInfo) {
             with(binding) {
-                titleName.text = filmItem.title
-                voteAverageView.text = filmItem.voteAverage.toString()
+                itemCard.setOnClickListener {
+                    onShopItemClickListener?.invoke(itemFilm)
+                }
+                titleName.text = itemFilm.title
+                voteAverageView.text = itemFilm.voteAverage.toString()
                 Glide.with(posterView.context)
-                    .load(filmItem.poster_path)
+                    .load(itemFilm.poster_path)
                     .placeholder(R.drawable.placeholder_film)
                     .error(R.drawable.placeholder_film)
                     .into(posterView)
+
             }
 
         }
