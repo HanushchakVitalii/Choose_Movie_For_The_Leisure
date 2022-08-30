@@ -11,4 +11,5 @@ class FullFilmInfoViewModel: ViewModel() {
         return FilmRepository.getFilmAdditionalInfo(id)
     }
 
+
 }

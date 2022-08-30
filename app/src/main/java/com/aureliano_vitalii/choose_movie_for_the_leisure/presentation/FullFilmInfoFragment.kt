@@ -56,14 +56,11 @@ class FullFilmInfoFragment : Fragment() {
                 .into(posterView)
             titleName.text = filmInfo.title
             releaseDate.text = filmAdditionalInfo!!.releaseDate
+            genreName.text = filmAdditionalInfo.genreIds
             voteAverageView.text = filmInfo.voteAverage.toString()
             voteCountView.text = filmAdditionalInfo.voteCount.toString()
             overview.text = filmAdditionalInfo.overview
-
-
-
         }
-
     }
 
     override fun onDestroyView() {

@@ -1,5 +1,6 @@
 package com.aureliano_vitalii.choose_movie_for_the_leisure.repository
 
+import android.util.Log
 import com.aureliano_vitalii.choose_movie_for_the_leisure.api.ApiFactory
 import com.aureliano_vitalii.choose_movie_for_the_leisure.entity.AdditionalFilmInfo
 import com.aureliano_vitalii.choose_movie_for_the_leisure.entity.ShortFilmInfo
@@ -20,12 +21,13 @@ object FilmRepository {
     private val filmInfoMap = mutableMapOf<Int?, AdditionalFilmInfo>()
     private var isSuccessfullLoadData: Boolean = false
     private var isSuccessfullLoadGenre: Boolean = false
-    private var getGenreFilmResponse: GenreResponseDto? = null
+    private var genreFilmResponseDto: GenreResponseDto? = null
+    private val genreMap = mutableMapOf<Int?, String?>()
 
 
-    suspend fun loadData(page: Int) = withContext(Dispatchers.IO) {
+    suspend fun loadData() = withContext(Dispatchers.IO) {
         try {
-            mainFilmResponseDto = apiService.getMainFilmResponse(page = page)
+            mainFilmResponseDto = apiService.getMainFilmResponse()
             isSuccessfullLoadData = true
 
         } catch (e: Exception) {
@@ -33,16 +35,26 @@ object FilmRepository {
 
     }
 
-    suspend fun loadGenre() {
+    suspend fun loadGenre() = withContext(Dispatchers.IO)  {
         try {
-            getGenreFilmResponse = apiService.getGenreFilmResponse()
+            genreFilmResponseDto = apiService.getGenreFilmResponse()
             isSuccessfullLoadGenre = true
+            createMapGenre()
+            createAdditionalFilmInfo()
         } catch (e: Exception) {
         }
     }
 
+    private fun createMapGenre()  {
+        genreFilmResponseDto?.let {
+            for (i in it.genres!!) {
+                genreMap[i.id] = i.name
+            }
+        }
+    }
+
     fun getFilmShortInfoSet(): Set<ShortFilmInfo> {
-        createFilmInfo()
+        createShortFilmInfo()
         return filmShortInfoSet
     }
 
@@ -50,7 +62,20 @@ object FilmRepository {
         return filmInfoMap[id]
     }
 
-    private fun createFilmInfo() {
+    private fun getGenre(list: List<Int>?): String {
+        var str = ""
+        if (list != null) {
+            for (i in list) {
+                str += genreMap[i] + ", "
+            }
+        }
+        Log.d("Repository", str)
+        return str
+
+    }
+
+
+    private fun createShortFilmInfo() {
         if (isSuccessfullLoadData) {
             mainFilmResponseDto?.let {
                 for (i in it.results!!) {
@@ -60,15 +85,26 @@ object FilmRepository {
                         BASE_URL_FOR_IMAGE + i.posterPath,
                         i.voteAverage
                     )
+                    filmShortInfoSet.add(shortFilmInfo)
+                }
+            }
+        }
+
+    }
+
+
+    private fun createAdditionalFilmInfo() {
+        if (isSuccessfullLoadData) {
+            mainFilmResponseDto?.let {
+                for (i in it.results!!) {
                     val additionalFilmInfo = AdditionalFilmInfo(
                         i.adult,
-                        i.genreIds,
+                        getGenre(i.genreIds),
                         i.overview,
                         i.voteCount,
                         i.releaseDate
-                        )
+                    )
                     filmInfoMap[i.id] = additionalFilmInfo
-                    filmShortInfoSet.add(shortFilmInfo)
                 }
             }
         }

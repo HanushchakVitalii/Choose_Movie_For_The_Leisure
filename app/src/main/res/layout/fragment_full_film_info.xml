@@ -39,7 +39,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/filmName"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:textColor="@color/black"
         android:textStyle="bold"
         />
@@ -76,8 +76,8 @@
 
     <TextView
         android:id="@+id/voteAverageView"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         app:layout_constraintStart_toStartOf="@id/guideline"
         app:layout_constraintTop_toBottomOf ="@id/genreName"
         app:layout_constraintEnd_toStartOf="@id/voteCountView"
@@ -86,7 +86,7 @@
         android:layout_marginStart="8dp"
         android:background="@drawable/circle_standard_background"
         android:text="@string/standardNumber"
-        android:textSize="24sp"
+        android:textSize="16sp"
         android:textColor="@color/black"
         android:textStyle="bold"
         />
@@ -103,7 +103,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:text="@string/standardNumber"
-        android:textSize="24sp"
+        android:textSize="16sp"
         android:textColor="@color/black"
         android:textStyle="bold"
 

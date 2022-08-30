@@ -15,12 +15,11 @@ class FilmInfoViewModel : ViewModel() {
 
     init {
         viewModelScope.launch {
-            for(i in 1..20){
-                FilmRepository.loadData(i)
+                FilmRepository.loadData()
                 filmList.postValue(FilmRepository.getFilmShortInfoSet().toList())
 
-            }
 
+            FilmRepository.loadGenre()
 //            Log.d("VM", "$counter")
 
         }

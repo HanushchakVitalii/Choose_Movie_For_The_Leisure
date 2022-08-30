@@ -9,9 +9,9 @@ data class GenreDto(
 
     @SerializedName("id")
     @Expose
-    private val id: Int? = null,
+    val id: Int? = null,
 
     @SerializedName("name")
     @Expose
-    private val name: String? = null
+    val name: String? = null
 )
