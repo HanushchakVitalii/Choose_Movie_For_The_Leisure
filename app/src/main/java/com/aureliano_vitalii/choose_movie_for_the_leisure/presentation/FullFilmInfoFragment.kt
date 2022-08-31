@@ -1,5 +1,6 @@
 package com.aureliano_vitalii.choose_movie_for_the_leisure.presentation
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,17 +12,31 @@ import com.aureliano_vitalii.choose_movie_for_the_leisure.R
 import com.aureliano_vitalii.choose_movie_for_the_leisure.databinding.FragmentFullFilmInfoBinding
 import com.aureliano_vitalii.choose_movie_for_the_leisure.entity.ShortFilmInfo
 import com.bumptech.glide.Glide
+import javax.inject.Inject
 
 
 class FullFilmInfoFragment : Fragment() {
+
+    private val component by lazy{
+        (requireActivity().application as FilmApp).component
+    }
 
     private lateinit var filmInfo: ShortFilmInfo
 
     private var _binding: FragmentFullFilmInfoBinding? = null
     private val binding: FragmentFullFilmInfoBinding
         get() = _binding ?: throw RuntimeException("FragmentFullFilmInfoBinding == null")
-    private lateinit var viewModel: FullFilmInfoViewModel
 
+
+    lateinit var viewModel: FullFilmInfoViewModel
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    override fun onAttach(context: Context) {
+//        component.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

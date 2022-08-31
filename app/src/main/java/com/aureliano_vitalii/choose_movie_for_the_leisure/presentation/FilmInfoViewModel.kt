@@ -6,20 +6,21 @@ import androidx.lifecycle.viewModelScope
 import com.aureliano_vitalii.choose_movie_for_the_leisure.entity.ShortFilmInfo
 import com.aureliano_vitalii.choose_movie_for_the_leisure.repository.FilmRepository
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
-class FilmInfoViewModel : ViewModel() {
+class FilmInfoViewModel @Inject constructor(repository: FilmRepository) : ViewModel() {
 
 
     val filmList = MutableLiveData<List<ShortFilmInfo>>()
 
     init {
         viewModelScope.launch {
-                FilmRepository.loadData()
-                filmList.postValue(FilmRepository.getFilmShortInfoSet().toList())
+                repository.loadData()
+                filmList.postValue(repository.getFilmShortInfoSet().toList())
 
 
-            FilmRepository.loadGenre()
+            repository.loadGenre()
 //            Log.d("VM", "$counter")
 
         }

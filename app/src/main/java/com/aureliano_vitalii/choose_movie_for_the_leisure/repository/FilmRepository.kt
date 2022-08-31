@@ -2,18 +2,17 @@ package com.aureliano_vitalii.choose_movie_for_the_leisure.repository
 
 import android.util.Log
 import com.aureliano_vitalii.choose_movie_for_the_leisure.api.ApiFactory
+import com.aureliano_vitalii.choose_movie_for_the_leisure.di.AppScope
 import com.aureliano_vitalii.choose_movie_for_the_leisure.entity.AdditionalFilmInfo
 import com.aureliano_vitalii.choose_movie_for_the_leisure.entity.ShortFilmInfo
-import com.aureliano_vitalii.choose_movie_for_the_leisure.pojo.FilmInfoDto
 import com.aureliano_vitalii.choose_movie_for_the_leisure.pojo.GenreResponseDto
 import com.aureliano_vitalii.choose_movie_for_the_leisure.pojo.MainFilmResponseDto
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-object FilmRepository {
-
-    private const val BASE_URL_FOR_IMAGE = "https://image.tmdb.org/t/p/w500"
-
+@AppScope
+class FilmRepository @Inject constructor(){
 
     private val apiService = ApiFactory.apiService
     private var mainFilmResponseDto: MainFilmResponseDto? = null
@@ -82,7 +81,7 @@ object FilmRepository {
                     val shortFilmInfo = ShortFilmInfo(
                         i.id,
                         i.title,
-                        BASE_URL_FOR_IMAGE + i.posterPath,
+                        Companion.BASE_URL_FOR_IMAGE + i.posterPath,
                         i.voteAverage
                     )
                     filmShortInfoSet.add(shortFilmInfo)
@@ -109,6 +108,10 @@ object FilmRepository {
             }
         }
 
+    }
+
+    companion object {
+        private const val BASE_URL_FOR_IMAGE = "https://image.tmdb.org/t/p/w500"
     }
 
 

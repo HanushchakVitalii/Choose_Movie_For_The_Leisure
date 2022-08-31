@@ -1,5 +1,6 @@
 package com.aureliano_vitalii.choose_movie_for_the_leisure.presentation
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,15 +11,29 @@ import androidx.lifecycle.ViewModelProvider
 import com.aureliano_vitalii.choose_movie_for_the_leisure.R
 import com.aureliano_vitalii.choose_movie_for_the_leisure.databinding.FragmentMainFilmInfoBinding
 import com.aureliano_vitalii.choose_movie_for_the_leisure.entity.ShortFilmInfo
+import javax.inject.Inject
 
 
 class MainFilmInfoFragment : Fragment() {
+
+    private val component by lazy{
+        (requireActivity().application as FilmApp).component
+    }
 
     private var _binding: FragmentMainFilmInfoBinding? = null
     private val binding: FragmentMainFilmInfoBinding
         get() = _binding ?: throw RuntimeException("FragmentMainFilmInfoBinding == null")
     private lateinit var viewModel: FilmInfoViewModel
     private lateinit var filmAdapter: FilmListAdapter
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+
+    override fun onAttach(context: Context) {
+//        component.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
