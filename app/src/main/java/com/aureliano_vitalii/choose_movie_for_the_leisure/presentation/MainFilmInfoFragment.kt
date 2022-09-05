@@ -31,7 +31,7 @@ class MainFilmInfoFragment : Fragment() {
 
 
     override fun onAttach(context: Context) {
-//        component.inject(this)
+        component.inject(this)
         super.onAttach(context)
     }
 
@@ -48,7 +48,7 @@ class MainFilmInfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
-        viewModel = ViewModelProvider(this)[FilmInfoViewModel::class.java]
+        viewModel = ViewModelProvider(this, viewModelFactory)[FilmInfoViewModel::class.java]
 
         viewModel.filmList.observe(viewLifecycleOwner) {
             filmAdapter.submitList(it)

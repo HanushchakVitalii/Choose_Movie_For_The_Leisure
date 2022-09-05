@@ -34,7 +34,7 @@ class FullFilmInfoFragment : Fragment() {
     lateinit var viewModelFactory: ViewModelFactory
 
     override fun onAttach(context: Context) {
-//        component.inject(this)
+        component.inject(this)
         super.onAttach(context)
     }
 
@@ -61,7 +61,7 @@ class FullFilmInfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this)[FullFilmInfoViewModel::class.java]
+        viewModel = ViewModelProvider(this, viewModelFactory)[FullFilmInfoViewModel::class.java]
         val filmAdditionalInfo = filmInfo.id?.let { viewModel.getItemFullFilmInfo(it) }
         with(binding){
             Glide.with(posterView.context)
