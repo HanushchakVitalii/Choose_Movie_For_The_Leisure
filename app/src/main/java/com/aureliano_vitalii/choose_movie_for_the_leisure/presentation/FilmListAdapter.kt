@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide
 
 class FilmListAdapter : ListAdapter<ShortFilmInfo, FilmListAdapter.FilmShortInfoViewHolder>(FilmShortItemDiffCallback()) {
 
-    var onShopItemClickListener: ((ShortFilmInfo) -> Unit)? = null
+    var onFilmItemClickListener: ((ShortFilmInfo) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmShortInfoViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -32,7 +32,7 @@ class FilmListAdapter : ListAdapter<ShortFilmInfo, FilmListAdapter.FilmShortInfo
         fun bindView(itemFilm: ShortFilmInfo) {
             with(binding) {
                 itemCard.setOnClickListener {
-                    onShopItemClickListener?.invoke(itemFilm)
+                    onFilmItemClickListener?.invoke(itemFilm)
                 }
                 titleName.text = itemFilm.title
                 voteAverageView.text = itemFilm.voteAverage.toString()
