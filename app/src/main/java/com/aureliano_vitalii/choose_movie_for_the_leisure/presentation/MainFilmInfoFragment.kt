@@ -58,7 +58,7 @@ class MainFilmInfoFragment : Fragment() {
     }
 
     private fun setupClickListener(){
-        filmAdapter.onShopItemClickListener = {
+        filmAdapter.onFilmItemClickListener = {
              launchFullFilmFragment(it)
         }
     }
