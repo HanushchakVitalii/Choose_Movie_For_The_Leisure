@@ -9,7 +9,7 @@ import dagger.Component
 
 @AppScope
 @Component(
-    modules = [ ViewModelModule::class ]
+    modules = [ ViewModelModule::class, RetrofitModule::class ]
 )
 interface AppComponent {
 

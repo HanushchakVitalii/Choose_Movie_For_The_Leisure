@@ -64,7 +64,7 @@ class FullFilmInfoFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory)[FullFilmInfoViewModel::class.java]
         val filmAdditionalInfo = filmInfo.id?.let { viewModel.getItemFullFilmInfo(it) }
         with(binding){
-            Glide.with(posterView.context)
+            val into = Glide.with(posterView.context)
                 .load(filmInfo.poster_path)
                 .placeholder(R.drawable.placeholder_film)
                 .error(R.drawable.placeholder_film)

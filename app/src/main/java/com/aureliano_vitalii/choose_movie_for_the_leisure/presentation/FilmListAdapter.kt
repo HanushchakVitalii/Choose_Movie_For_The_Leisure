@@ -18,7 +18,6 @@ class FilmListAdapter : ListAdapter<ShortFilmInfo, FilmListAdapter.FilmShortInfo
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmShortInfoViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = FilmShortInfoItemBinding.inflate(inflater, parent, false)
-        Log.d("Holder", binding.toString())
         return FilmShortInfoViewHolder(binding)
     }
 

@@ -1,7 +1,7 @@
 package com.aureliano_vitalii.choose_movie_for_the_leisure.repository
 
 import android.util.Log
-import com.aureliano_vitalii.choose_movie_for_the_leisure.api.ApiFactory
+import com.aureliano_vitalii.choose_movie_for_the_leisure.api.ApiService
 import com.aureliano_vitalii.choose_movie_for_the_leisure.di.AppScope
 import com.aureliano_vitalii.choose_movie_for_the_leisure.entity.AdditionalFilmInfo
 import com.aureliano_vitalii.choose_movie_for_the_leisure.entity.ShortFilmInfo
@@ -12,9 +12,8 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @AppScope
-class FilmRepository @Inject constructor(){
+class FilmRepository @Inject constructor(private val apiService: ApiService){
 
-    private val apiService = ApiFactory.apiService
     private var mainFilmResponseDto: MainFilmResponseDto? = null
     private val filmShortInfoSet = mutableSetOf<ShortFilmInfo>()
     private val filmInfoMap = mutableMapOf<Int?, AdditionalFilmInfo>()
