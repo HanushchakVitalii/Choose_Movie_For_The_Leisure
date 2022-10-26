@@ -2,7 +2,7 @@ package com.aureliano_vitalii.choose_movie_for_the_leisure.di
 
 
 import com.aureliano_vitalii.choose_movie_for_the_leisure.api.ApiService
-import com.aureliano_vitalii.choose_movie_for_the_leisure.api.NetworkUrls
+import com.aureliano_vitalii.choose_movie_for_the_leisure.utils.NetworkConfig
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -18,7 +18,7 @@ object RetrofitModule {
     fun provideRetrofit(): Retrofit.Builder {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(NetworkUrls.BASE_URL)
+            .baseUrl(NetworkConfig.BASE_URL)
 
     }
 
