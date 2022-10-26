@@ -3,7 +3,6 @@ package com.aureliano_vitalii.choose_movie_for_the_leisure.api
 import com.aureliano_vitalii.choose_movie_for_the_leisure.BuildConfig
 import com.aureliano_vitalii.choose_movie_for_the_leisure.pojo.GenreResponseDto
 import com.aureliano_vitalii.choose_movie_for_the_leisure.pojo.MainFilmResponseDto
-import com.aureliano_vitalii.choose_movie_for_the_leisure.utils.NetworkConfig.API_KEY
 import retrofit2.http.GET
 import retrofit2.http.Query
 

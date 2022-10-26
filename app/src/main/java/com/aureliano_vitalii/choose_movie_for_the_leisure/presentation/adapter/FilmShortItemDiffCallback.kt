@@ -1,4 +1,4 @@
-package com.aureliano_vitalii.choose_movie_for_the_leisure.presentation
+package com.aureliano_vitalii.choose_movie_for_the_leisure.presentation.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import com.aureliano_vitalii.choose_movie_for_the_leisure.entity.ShortFilmInfo

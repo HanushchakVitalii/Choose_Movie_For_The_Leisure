@@ -1,6 +1,5 @@
-package com.aureliano_vitalii.choose_movie_for_the_leisure.presentation
+package com.aureliano_vitalii.choose_movie_for_the_leisure.presentation.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -11,7 +10,9 @@ import com.aureliano_vitalii.choose_movie_for_the_leisure.entity.ShortFilmInfo
 import com.bumptech.glide.Glide
 
 
-class FilmListAdapter : ListAdapter<ShortFilmInfo, FilmListAdapter.FilmShortInfoViewHolder>(FilmShortItemDiffCallback()) {
+class FilmListAdapter : ListAdapter<ShortFilmInfo, FilmListAdapter.FilmShortInfoViewHolder>(
+    FilmShortItemDiffCallback()
+) {
 
     var onFilmItemClickListener: ((ShortFilmInfo) -> Unit)? = null
 

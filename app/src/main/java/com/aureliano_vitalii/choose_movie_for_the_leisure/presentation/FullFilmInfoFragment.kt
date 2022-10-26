@@ -2,7 +2,6 @@ package com.aureliano_vitalii.choose_movie_for_the_leisure.presentation
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.aureliano_vitalii.choose_movie_for_the_leisure.R
 import com.aureliano_vitalii.choose_movie_for_the_leisure.databinding.FragmentFullFilmInfoBinding
 import com.aureliano_vitalii.choose_movie_for_the_leisure.entity.ShortFilmInfo
+import com.aureliano_vitalii.choose_movie_for_the_leisure.presentation.viewmodels.FullFilmInfoViewModel
+import com.aureliano_vitalii.choose_movie_for_the_leisure.presentation.viewmodels.ViewModelFactory
 import com.bumptech.glide.Glide
 import javax.inject.Inject
 
